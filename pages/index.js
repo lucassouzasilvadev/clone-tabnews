@@ -1,6 +1,6 @@
 
 function Home(){
-    return <h1>É foda, nada funciona, nada que é do pobre funciona</h1>
+    return <h1>É foda, ludmilo</h1>
 }
 
 export default Home;
