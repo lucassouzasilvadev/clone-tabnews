@@ -10,9 +10,11 @@ async function status(request, response) {
   const dataBaseMaxConnectionsValue =
     dataBaseMaxConnectionResult.rows[0].max_connections;
 
-  const dataBaseOpennedConnectionResult = await database.query(
-    "SELECT count(*)::int FROM pg_stat_activity WHERE datname = 'local_db';",
-  );
+  const databaseName = process.env.POSTGRES_DB;
+  const dataBaseOpennedConnectionResult = await database.query({
+    text: "SELECT count(*)::int FROM pg_stat_activity WHERE datname = $1",
+    values: [databaseName],
+  });
 
   response.status(200).json({
     updated_at: updatedAt,
